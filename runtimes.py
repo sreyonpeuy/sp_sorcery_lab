@@ -20,6 +20,10 @@ if __name__ == '__main__':
     parser.add_argument('--input', choices=['sorted', 'random'], default='random')
     args = parser.parse_args()
 
+    # Printing the header before the loop starts
+    print("| len(xs) | timsort | quicksort | mergesort |")
+    print("|---------|---------|-----------|-----------|")
+
     # perform the runtime tests
     for x in range(0, args.max_x+1):
 
@@ -55,8 +59,10 @@ if __name__ == '__main__':
         # You will have to look up how to do this formatting.
         # In order to get a proper markdown table,
         # you will have to also print a header line somewhere else.
-        print(f'len(xs)=2**{x} runtimes={runtimes}')
-
+        # Inside the loop for each x:
+        print(f"| 2**{x:<4} | {runtimes['timsort']:0.2e} | {runtimes['quick_sorted']:0.2e} | {runtimes['merge_sorted']:0.2e} |")
+        row_values = " | ".join(f"{runtimes[k]:0.2e}" for k in runtimes)
+        print(f"| 2**{x:<4} | {row_values} |")
         # HINT:
         # use f-strings and a print statement that looks something like
         # print(f"| {runtimes['timsort']:0.2e} ")
